@@ -9,3 +9,4 @@ async function uncensoredAi(prompt){
      console.log(response)
 
 }
+export default uncensoredAi;
