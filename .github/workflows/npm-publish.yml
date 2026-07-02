@@ -18,7 +18,7 @@ jobs:
           registry-url: 'https://npmjs.org'
 
       - name: Install Dependencies
-        run: npm ci
+        run: npm install
 
       # This step builds your project if you are using TypeScript or a bundler
       - name: Build Project
