@@ -7,3 +7,5 @@ async function uncensoredAi(prompt){
     const request = await fetch(`${route}/veniceUncensored?prompt=${encodeURIComponent(prompt)}`);
     const response = await request.json();
      console.log(response)
+
+}
