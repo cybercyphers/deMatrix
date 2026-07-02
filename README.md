@@ -1,2 +1,2 @@
 # deMatrix
-pacckage Apis
+package Apis
