@@ -1,0 +1,14 @@
+{
+    "name" : "deMatrix",
+    "type" : "module",
+    "main" : "index.js",
+    "script" :{
+        "start" : "node index.js",
+        "stop" : "pkill-node"
+},
+
+  "dependencies": {
+    "axios": "^1.18.1",
+    "node-fetch": "^3.3.2"
+  }
+}
