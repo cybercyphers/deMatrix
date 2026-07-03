@@ -1,6 +1,7 @@
 import axios from 'axios';
 import fetch from  'node-fetch';
 
+console.log("\n\x1b[1;32mThank you for using me\n\x1b[0m")
 const route = "https://panel-cyphers.nett.to/cyphers"
 
 async function uncensoredAi(prompt){
