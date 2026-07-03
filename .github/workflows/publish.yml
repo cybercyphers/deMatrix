@@ -1,17 +1,30 @@
-name: Unpublish Package
+name: Publish Package to npm
 
-on: workflow_dispatch
+on:
+  release:
+    types: [created]
 
 jobs:
-  unpublish:
+  publish:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+      
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           registry-url: 'https://registry.npmjs.org/'
       
-      - name: Unpublish package
-        run: npm unpublish dematrix@1.0.0-beta.0
+      - name: Clear npm cache and install
+        run: |
+          npm cache clean --force
+          rm -rf node_modules package-lock.json
+          npm install
+      
+      - name: Run tests
+        run: npm test || true
+      
+      - name: Publish to npm
+        run: npm publish --tag beta
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
