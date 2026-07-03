@@ -49,6 +49,6 @@ process.on("uncaughtException",(e)=>{
 
 
  module.exports = uncensoredAi;
-module.exports = { gpt3,
-                  getEncryptionKeys
-                 }
+ module.exports.gpt3 =  gpt3;
+ module.exports.getEncryptionKeys = getEncryptionKeys;
+                 
