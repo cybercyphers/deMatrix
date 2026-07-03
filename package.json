@@ -24,7 +24,9 @@
         "node-fetch": "^3.3.2"
     },
     "devDependencies": {
-        "@types/node": "^26.1.0"
+        "@types/node": "^26.1.0",
+        "ts-node":"@latest",
+        "typescript": "^5.0.0"
     },
     "engines": {
         "node": ">=20"
