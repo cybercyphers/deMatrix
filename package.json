@@ -5,7 +5,8 @@
     "main" : "index.js",
     "script" :{
         "start" : "node index.js",
-        "stop" : "pkill-node"
+        "stop" : "pkill-node",
+        "echo \"No tests\" && exit 0"
 },
 
   "dependencies": {
