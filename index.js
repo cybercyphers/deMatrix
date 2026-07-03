@@ -1,7 +1,9 @@
-
 const axios = require('axios')
 const { exec } = require("child_process");
-const failed = require("./_otherFunc/error.js");
+const {
+ failed,
+ logErr
+} = require("./_otherFunc/oddFuncs.js");
 
 
 
@@ -20,7 +22,27 @@ async function gpt3(prompt){
   const request =await fetch(`${route}/gpt3?prompt=${encodeURIComponent(prompt)}`);
     const response = await request.json();
      console.log(response)
+};
+
+
+
+async function bibleAi(prompt){
+    try{
+  if(!prompt){  
+   logErr("The prompt is required...");
+      return;
+  };
+    
+    const request = await axios.get(`${route}/bibleAi?prompt=${encodeURIComponent(prompt)}`);
+    
+    const response = request.data;
+        
+     console.log({ response : response.data} )
+
+    }catch(e){
+   failed(e)
 }
+};
 
 
 async function getEncryptionKeys(){
@@ -34,6 +56,10 @@ async function getEncryptionKeys(){
          console.log(finalInfo)
     }catch(err){ failed(err) }
 }
+
+
+bibleAi("What is a bible")
+
 
 
 
@@ -50,5 +76,6 @@ process.on("uncaughtException",(e)=>{
 
  module.exports = uncensoredAi;
  module.exports.gpt3 =  gpt3;
+ module.exports.bibleAi = bibleAi;
  module.exports.getEncryptionKeys = getEncryptionKeys;
                  
