@@ -1,15 +1,18 @@
 {
     "name": "dematrix",
     "version": "1.0.0-beta.1",
-    "type": "commonJS",
     "main": "index.js",
     "scripts": {
         "start": "node index.js",
         "stop": "pkill-node",
-        "test": "echo \"No tests\" && exit 0"
+        "test": "echo \"No tests\" && exit 0",
+        "install-types": "npm i --save-dev @types/node"
     },
     "description": "Api for developer. free",
-    "keywords": ["matrix", "decentralized"],
+    "keywords": [
+        "matrix",
+        "decentralized"
+    ],
     "author": "cyber cyphers",
     "license": "MIT",
     "repository": {
@@ -20,7 +23,10 @@
         "axios": "^1.18.1",
         "node-fetch": "^3.3.2"
     },
-     "engines" :{ 
-         "node" : ">=20"
-  }
+    "devDependencies": {
+        "@types/node": "^26.1.0"
+    },
+    "engines": {
+        "node": ">=20"
+    }
 }
