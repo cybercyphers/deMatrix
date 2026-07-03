@@ -1,4 +1,4 @@
-function failed(err:any):string{
+function failed(err):string{
         try{
     const errStack:any = err.stack || err.message; 
     const isObj:string = typeof errStack === "object" ? JSON.stringify(errStack) : String(errStack);
