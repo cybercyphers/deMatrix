@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "Node",
+    "target": "ES2022",
+    "rootDir": "./",
+    "ignoreDeprecations": "6.0"
+  },
+  "ts-node": {
+    "transpileOnly": true,
+    "esm" : true
+  }
+}
