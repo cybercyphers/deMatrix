@@ -5,8 +5,7 @@
     "scripts": {
         "start": "node index.js",
         "stop": "pkill-node",
-        "test": "echo \"No tests\" && exit 0",
-        "install-types": "npm i --save-dev @types/node"
+        "test": "echo \"No tests\" && exit 0"
     },
     "description": "Api for developer. free",
     "keywords": [
