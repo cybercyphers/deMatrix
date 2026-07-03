@@ -58,8 +58,6 @@ async function getEncryptionKeys(){
 }
 
 
-bibleAi("What is a bible")
-
 
 
 
