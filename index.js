@@ -1,4 +1,3 @@
-require("ts-node").register();
 
 const axios = require('axios')
 const { exec } = require("child_process");
