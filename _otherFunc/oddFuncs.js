@@ -10,4 +10,12 @@ function failed(err){
 
 
 
-module.exports = failed;
+function logErr(error){
+  console.log(`\x1b[31m${error}\x1b[0m`);  
+};
+
+
+module.exports ={ 
+    failed,
+    logErr
+}
