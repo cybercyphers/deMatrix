@@ -8,6 +8,7 @@
   },
   "ts-node": {
     "transpileOnly": true,
-    "esm" : true
+    "experimentalResolver": true,
+    "skipIgnore": true
   }
 }
