@@ -36,8 +36,6 @@ async function getEncryptionKeys(){
 }
 
 
-getEncryptionKeys()
-
 
 process.on("unhandledRejection",(r)=>{
    console.log(`\n\x1b[1;31mUnhandled Rejection => ${r}\n\x1b[0m`);
