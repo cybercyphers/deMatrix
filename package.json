@@ -25,7 +25,7 @@
     },
     "devDependencies": {
         "@types/node": "^26.1.0",
-        "ts-node":"@latest",
+        "ts-node":"^10.9.2",
         "typescript": "^5.0.0"
     },
     "engines": {
