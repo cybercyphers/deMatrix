@@ -1,7 +1,7 @@
 {
     "name": "dematrix",
     "version": "1.0.0-beta.1",
-    "type": "CommonJS",
+    "type": "commonJS",
     "main": "index.js",
     "scripts": {
         "start": "node index.js",
