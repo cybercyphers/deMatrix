@@ -8,9 +8,6 @@ import  {
 } from "./_otherFunc/oddFuncs.js";
 
 
-
-console.log("\n\x1b[1;4;35mThank you for using me\n\x1b[0m");
-
 const route = "https://panel-cyphers.nett.to/cyphers"
 
 async function uncensoredAi(prompt){
