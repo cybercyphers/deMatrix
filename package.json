@@ -33,7 +33,7 @@
   },
   
   "devDependencies": {
-    "rollup": "latest",
+    "rollup": "latest"
   },
   "engines": {
     "node": ">=20"
