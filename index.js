@@ -1,27 +1,42 @@
-const axios = require('axios')
-const { exec } = require("child_process");
-const {
+import axios from 'axios';
+import crypto from 'crypto';
+import  {
  failed,
- logErr
-} = require("./_otherFunc/oddFuncs.js");
+ logErr,
+ encrypt,
+    decrypt 
+} from "./_otherFunc/oddFuncs.js";
 
 
 
-console.log("\n\x1b[1;4;35mThank you for using me\n\x1b[0m")
+console.log("\n\x1b[1;4;35mThank you for using me\n\x1b[0m");
 
 const route = "https://panel-cyphers.nett.to/cyphers"
 
+const dematrix =()=>{
+   console.log("hello");
+}
 async function uncensoredAi(prompt){
     const request = await fetch(`${route}/veniceUncensored?prompt=${encodeURIComponent(prompt)}`);
     const response = await request.json();
-     console.log(response)
+  
+    return response;
 
 }
 
 async function gpt3(prompt){
+    try{
+    if(!prompt){
+        
+  return logErr("The question body  is required...");
+}
+    
   const request =await fetch(`${route}/gpt3?prompt=${encodeURIComponent(prompt)}`);
     const response = await request.json();
-     console.log(response)
+      return response;
+    } catch(e){
+  failed(e)
+}
 };
 
 
@@ -37,7 +52,7 @@ async function bibleAi(prompt){
     
     const response = request.data;
         
-     console.log({ response : response.data} )
+     return { response : response.data};
 
     }catch(e){
    failed(e)
@@ -45,7 +60,7 @@ async function bibleAi(prompt){
 };
 
 
-async function getEncryptionKeys(){
+async function getEncryptionCredentials(){
     try{
        
  const request = await fetch(`${route}/getEncryptionCredentials`);
@@ -53,9 +68,13 @@ async function getEncryptionKeys(){
         const finalInfo = { Key : response.data.key+"\n",
             Iv : response.data.iv+"\n",
                           I_Info : response.data.Important_Info }
-         console.log(finalInfo)
+        return finalInfo;
     }catch(err){ failed(err) }
-}
+};
+
+
+
+
 
 
 
@@ -72,8 +91,13 @@ process.on("uncaughtException",(e)=>{
 
 
 
- module.exports = uncensoredAi;
- module.exports.gpt3 =  gpt3;
- module.exports.bibleAi = bibleAi;
- module.exports.getEncryptionKeys = getEncryptionKeys;
-                 
+
+export {
+dematrix as default,
+uncensoredAi,
+    gpt3,
+    bibleAi,
+    getEncryptionCredentials,
+    encrypt,
+    decrypt
+} 
