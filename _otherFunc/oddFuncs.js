@@ -77,7 +77,7 @@ function decrypt(KEY,IV,DATA){
 
 
 
-export = { 
+export { 
     failed,
     logErr,
     encrypt,
