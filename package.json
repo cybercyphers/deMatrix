@@ -2,23 +2,13 @@
   "name": "dematrix",
   "version": "1.1.1",
   "type": "module",
-  "description": "Api for developer. free",
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
-    }
-  },
-  "files": [
-    "dist"
-  ],
+  "main": "index.js",
   "scripts": {
-    "start": "tsup index.js --format cjs,esm --clean",
-    "stop": "pkill-node",
-    "test": "echo \"No tests\" && exit 0"
+    "start": "node index.js",
+    "stop": "pkill -f node",
+    "test": "echo \"Error: no test specified\" && exit 0"
   },
+  "description": "Api for developer. free",
   "keywords": [
     "matrix",
     "decentralized"
@@ -30,11 +20,9 @@
     "url": "git+https://github.com"
   },
   "dependencies": {
-    "axios": "^1.18.1"
+    "axios": "^1.18.1",
+    "crypto": "^1.0.1"
   },
-    "devDependencies" :{
-     "tsup": "latest"
- },     
   "engines": {
     "node": ">=20"
   }
