@@ -29,9 +29,9 @@
     "url": "git+https://github.com"
   },
   "dependencies": {
-    "axios": "^1.18.1",
-    "crypto": "^1.0.1"
+    "axios": "^1.18.1"
   },
+  
   "devDependencies": {
     "rollup": "^4.30.1"
   },
