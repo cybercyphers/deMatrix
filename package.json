@@ -14,10 +14,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "rollup -c",
-    "start": "npm run build && node index.js",
+    "start": "node index.js",
     "stop": "pkill -f node",
-    "prepublishOnly": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 0"
   },
   "description": "Api for developer. free",
@@ -32,9 +30,6 @@
     "axios": "^1.18.1"
   },
   
-  "devDependencies": {
-    "rollup": "latest"
-  },
   "engines": {
     "node": ">=20"
   }
