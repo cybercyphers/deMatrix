@@ -88,8 +88,7 @@ process.on("uncaughtException",(e)=>{
 
 
 
-
-export default dematrix = {
+var dematrix = {
 uncensoredAi,
     gpt3,
     bibleAi,
@@ -97,3 +96,5 @@ uncensoredAi,
     encrypt,
     decrypt
 };
+
+export default dematrix;
