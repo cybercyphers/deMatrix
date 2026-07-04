@@ -77,9 +77,9 @@ function decrypt(KEY,IV,DATA){
 
 
 
-export  * dematrix;
-/*{ failed,
+export {
+        failed,
     logErr,
     encrypt,
     decrypt
-}*/
+};
