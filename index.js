@@ -4,7 +4,11 @@ import  {
  failed,
  logErr,
  encrypt,
-    decrypt 
+    decrypt,
+    tiktokStalk,
+    apk,
+    github,
+ programming
 } from "./_otherFunc/oddFuncs.js";
 
 
@@ -14,7 +18,7 @@ async function uncensoredAi(prompt){
     const request = await fetch(`${route}/veniceUncensored?prompt=${encodeURIComponent(prompt)}`);
     const response = await request.json();
   
-    return response;
+      return { data : response.data } 
 
 }
 
@@ -22,12 +26,12 @@ async function gpt3(prompt){
     try{
     if(!prompt){
         
-  return logErr("The question body  is required...");
+  return logErr("The question body or prompt is required...");
 }
     
   const request =await fetch(`${route}/gpt3?prompt=${encodeURIComponent(prompt)}`);
     const response = await request.json();
-      return response;
+      return  { data : response.data };
     } catch(e){
   failed(e)
 }
@@ -67,6 +71,46 @@ async function getEncryptionCredentials(){
 };
 
 
+async function lyrics(song){
+    if(!song){
+        return logErr("The name of the song to get the lyrics is required")
+    }
+   const request = await fetch(`https://panel-cyphers.nett.to/cyphers/lyrics?name=${encodeURIComponent(song)}`);
+    const response = await request.json();
+      return { data : response.data };
+    
+};
+
+
+
+const facts = async()=>{
+    const request = await fetch("https://panel-cyphers.nett.to/cyphers/facts");
+    const response = await request.json();
+       return { data : response.data };
+};
+
+
+
+
+
+
+
+var dematrix = {
+uncensoredAi,
+    gpt3,
+    bibleAi,
+    getEncryptionCredentials,
+    encrypt,
+    decrypt,
+    lyrics ,
+    tiktokStalk,
+    apk,
+    github,
+   programming
+};
+
+
+export default dematrix;
 
 
 
@@ -83,15 +127,3 @@ process.on("uncaughtException",(e)=>{
   console.log(`\x1b[31mUncaught Exception => ${e}\x1b[0m`);
 });
 
-
-
-var dematrix = {
-uncensoredAi,
-    gpt3,
-    bibleAi,
-    getEncryptionCredentials,
-    encrypt,
-    decrypt
-};
-
-export default dematrix;
