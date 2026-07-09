@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 import axios from 'axios';
-
+import qrcode from 'qrcode';
 
 function failed(err){
         try{
@@ -15,7 +15,7 @@ function failed(err){
 
 
 function logErr(error){  
-  console.log(`\x1b[31m${error}\x1b[0m`);  
+  throw new Error(`\x1b[31m${error}\x1b[0m`);  
 };
 
 
@@ -126,13 +126,160 @@ const github = async(Url, typeOfInfo)=>{
 
 
 
+  function toBinary(data) {
+    return [...Buffer.from(data)]
+        .map(byte => byte.toString(2).padStart(8, "0"))
+        .join("");
+}
+
+export function cipher128(data) {
+    const patterns =   "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/¥!@#$%^&*()[]{}<>?|:;,.=_-`'\"\\§±×÷€£¥¢©®™°µ¶¿¡αβγδεζηθικλμνξοπρστυφχψω";
+
+    let binary = toBinary(data);
+    let encoded = "";
+  
+    while (binary.length % 7 !== 0) {
+        binary += "0";
+    }
+    for (let i = 0; i < binary.length; i += 7) {
+        const chunk = binary.slice(i, i + 7);
+      
+        const index = parseInt(chunk, 2);
+        encoded += patterns[index];
+    }
+    while (encoded.length % 8 !== 0) {
+        encoded += "=";
+    }
+
+    return encoded;
+}
+
+
+
+
+
+
+export function cypher128Encode(data) {
+    const alphabet =
+"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/¥!@#$%^&*()[]{}<>?|:;,.=_-`'\"\\§±×÷€£¥¢©®™°µ¶¿¡αβγδεζηθικλμνξοπρστυφχψω";
+
+    let binary = toBinary(data);
+    let encoded = "";
+
+    while (binary.length % 7 !== 0) {
+        binary += "0";
+    }
+
+    for (let i = 0; i < binary.length; i += 7) {
+        const chunk = binary.slice(i, i + 7);
+        const index = parseInt(chunk, 2);
+        encoded += alphabet[index];
+    }
+
+    return encoded;
+}
+
+export function cipher128Decode(data) {
+    const alphabet =
+"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/¥!@#$%^&*()[]{}<>?|:;,.=_-`'\"\\§±×÷€£¥¢©®™°µ¶¿¡αβγδεζηθικλμνξοπρστυφχψω";
+    let binary = "";
+    for (const char of data) {
+        const index = alphabet.indexOf(char);
+
+        if (index === -1) {
+            throw new Error(`Invalid character: ${char}`);
+        }
+        binary += index.toString(2).padStart(7, "0");
+    }
+    const bytes = [];
+    for (let i = 0; i + 8 <= binary.length; i += 8) {
+        bytes.push(parseInt(binary.slice(i, i + 8), 2));
+    }
+    return Buffer.from(bytes).toString();
+};
+
+
+
+
+
+
 const programming = async() =>{
   const request = await fetch("https://panel-cyphers.nett.to/cyphers/programming",);
     
     const response = await request.json();
     return  { data : response.data };
 
+};
+
+
+
+
+const formatCN = (num) => {
+    return new Intl.NumberFormat('en', { notation: 'compact' }).format(num);
+};
+
+
+
+
+export async function getqr(text, options = {}) {
+    const {
+        size = 200,
+        color = '#000000',
+        bgColor = '#FFFFFF',
+        margin = 10
+    } = options;
+    
+    /*const encoded = encodeURIComponent(text);
+    const info = await axios.get(`https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encoded}&margin=${margin}`, {
+        responseType: 'arraybuffer'
+    });
+    
+    const data = info.data;*/
+    
+    // Display QR in console
+    const terminalQR = await qrcode.toString(text, {  small : true });
+    return terminalQR
 }
+
+
+
+
+
+
+const md5 = (value)=>{
+  if(!value){
+   return logErr("The value to convert to md5 hash was not given...");
+}
+    const md5Hashed = crypto.createHash("md5").update(value).digest("hex");
+      
+    console.log({ data : md5Hashed });
+  return { md5Hashed };
+}
+
+
+
+
+const base64 = (data)=>{
+  if(!data){
+      logErr("The value to convert to base64 was not given...")     
+  };
+
+    const _64 = crypto.createHash("SHA512").update(data).digest("base64");
+     return _64;
+    
+};
+
+
+
+
+const uuid =() =>{
+    const uid = crypto.randomUUID();
+     return uid;
+}
+
+
+
+
 
 
 
@@ -144,5 +291,8 @@ export {
 tiktokStalk,
     apk,
     github,
-        programming
+     programming,
+    formatCN,
+    base64,
+    uuid
 };
