@@ -8,7 +8,13 @@ import  {
     tiktokStalk,
     apk,
     github,
- programming
+ programming,
+    getqr,
+    formatCN,
+    base64,
+    uuid,
+    cipher128,
+    cipher128Decode
 } from "./_otherFunc/oddFuncs.js";
 
 
@@ -91,6 +97,29 @@ const facts = async()=>{
 
 
 
+const iplookup = async(ip) =>{
+    if(!ip){
+        logErr("The ip to lookup is required.")
+    };
+      var addr = await fetch(`https://ipwho.is/${ip}`);
+    const request = await addr.json();
+      return request;
+};
+
+
+
+
+
+
+
+const hexToUtf = (hex) =>{
+  if(!hex){
+  logErr("Hex value not found..")
+}
+return       Buffer.from(hex,"hex").toString("utf8"); 
+};
+
+
 
 
 
@@ -106,12 +135,21 @@ uncensoredAi,
     tiktokStalk,
     apk,
     github,
-   programming
+   programming,
+    base64,
+    uuid,
+    iplookup
 };
 
 
-export default dematrix;
 
+export {
+          dematrix as default,
+    formatCN,
+    getqr,
+    cipher128,
+    cipher128Decode
+}
 
 
 
