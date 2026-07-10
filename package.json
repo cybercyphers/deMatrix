@@ -3,12 +3,15 @@
   "version": "1.1.3",
   "description": "Api for developers. free and many more",
   "type": "module",
-   "main": "./index.js",
+  "main": "./dist/index.cjs",
   "exports": {
-    ".": "./index.js"
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
   },
   "scripts": {
-    "start":"node build.js && node index.js",
+    "build": "node build.js",
     "test": "echo \"No tests\" && exit 0"
   },
   "keywords": [
@@ -21,14 +24,17 @@
     "type": "git",
     "url": "git+https://github.com/cybercyphers/deMatrix.git"
   },
-    "dependencies": {
+  "dependencies": {
     "axios": "^1.18.1",
     "qrcode": "^1.5.3"
   },
   "devDependencies": {
-      "esbuild" : "latest"
+    "esbuild": "latest"
   },
   "engines": {
     "node": ">=20"
-  }
+  },
+  "files": [
+    "dist"
+  ]
 }
