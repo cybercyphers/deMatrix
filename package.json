@@ -4,7 +4,7 @@
   "description": "Api for developers. free and many more",
   "type": "module",
   "scripts": {
-    "start":"node index.js",
+    "start":"node ./dist/build.js && node index.js",
     "test": "echo \"No tests\" && exit 0"
   },
   "keywords": [
