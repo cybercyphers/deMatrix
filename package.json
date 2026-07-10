@@ -15,8 +15,9 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cybercyphers/deMatrix.git",
-  "dependencies": {
+    "url": "git+https://github.com/cybercyphers/deMatrix.git"
+  },
+    "dependencies": {
     "axios": "^1.18.1",
     "qrcode": "^1.5.3"
   },
