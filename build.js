@@ -17,3 +17,5 @@ await build({
   format: "cjs",
   minify: true
 });
+
+console.log("Build completed successfully");
