@@ -8,7 +8,7 @@
     ".": "./index.js"
   },
   "scripts": {
-    "start":"node ./dist/build.js && node index.js",
+    "start":"node build.js && node index.js",
     "test": "echo \"No tests\" && exit 0"
   },
   "keywords": [
