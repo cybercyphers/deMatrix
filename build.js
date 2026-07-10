@@ -1,4 +1,7 @@
 import { build } from "esbuild";
+import { mkdir } from "fs/promises";
+
+await mkdir("dist", { recursive: true });
 
 await build({
   entryPoints: ["index.js"],
