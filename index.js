@@ -1,6 +1,6 @@
-import axios from 'axios';
-import crypto from 'crypto';
-import  {
+const axios = require('axios');
+const crypto  = require('crypto');
+const  {
  failed,
  logErr,
  encrypt,
@@ -13,12 +13,13 @@ import  {
     formatCN,
     base64,
     uuid,
-    cipher128,
-    cipher128Decode
-} from "./_otherFunc/oddFuncs.js";
+    cipher64,
+    cipher64Decode
+} = require("./_otherFunc/oddFuncs.js");
 
 
 const route = "https://panel-cyphers.nett.to/cyphers"
+
 
 async function uncensoredAi(prompt){
     const request = await fetch(`${route}/veniceUncensored?prompt=${encodeURIComponent(prompt)}`);
@@ -123,6 +124,80 @@ return       Buffer.from(hex,"hex").toString("utf8");
 
 
 
+ class Ai{
+  #web = `https://panel-cyphers.nett.to/cyphers`;
+   
+     
+     //cypherAi from me fully loaded working and active 
+    cypherAi  = {
+       question :  async(prompt) =>{
+           try{
+           
+         const request = await fetch(`${this.#web}/cypherAi?q=${prompt}`);
+           const response = await request.json();
+          return { response : response.data };
+           }catch(err){
+      logErr("Failed to get response");
+}
+
+  }
+ }
+    
+     //gpt3 route from my server all set to use in class 
+    gpt3 = {
+       question : async(prompt) =>{
+           try{
+          const request = await fetch(`${this.#web}/gpt3?prompt=${prompt}`);
+           const response = await request.json();
+         return { response:response.data  };
+           }catch(err){ logErr("Failed to get response")}
+       }
+       
+  }
+     //copilot route from my server...
+     
+     copilot  = {
+         question : async(prompt)=>{
+             try{
+                  if(!prompt){ return logErr("The prompt was not given for copilot to respond...")}
+                 const request = await fetch(`${this.#web}/cyphers/copilot?prompt${encodeURIComponent(prompt)}`)
+                   const response = await request.json();
+                       return { response : response.data };
+             }catch(err){
+                 return logErr("request failed with status code: ",500)
+             }
+             
+         }
+         
+     }
+     
+     
+     //Qwen ai 
+     qwen ={
+          question: async(prompt)=>{
+              try{
+              if(!prompt){
+
+                  return logErr("The prompt was not given to get a response from qwen ai...")
+              };
+               const request = await fetch(`${this.#web}/qwen?prompt=${encodeURIComponent(prompt)}`);
+                  
+              const response = await request.json();
+                   return { response : response.data };
+              }catch(err){ logErr("The request failed...")}
+              
+          }
+     }
+     
+     
+     
+               
+}
+
+const Ais = new Ai();
+Ais.qwen.question("hello nigga").then(d=>console.log(d))
+
+
 
 var dematrix = {
 uncensoredAi,
@@ -143,12 +218,13 @@ uncensoredAi,
 
 
 
-export {
-          dematrix as default,
+module.exports = {
+        default : dematrix,
     formatCN,
     getqr,
-    cipher128,
-    cipher128Decode
+    cipher64,
+    cipher64Decode,
+    Ai
 }
 
 
@@ -156,11 +232,11 @@ export {
 
 
 
-process.on("unhandledRejection",(r)=>{
+/*process.on("unhandledRejection",(r)=>{
    console.log(`\n\x1b[1;31mUnhandled Rejection => ${r}\n\x1b[0m`);
 });
 
 
 process.on("uncaughtException",(e)=>{
   console.log(`\x1b[31mUncaught Exception => ${e}\x1b[0m`);
-});
+});*/
