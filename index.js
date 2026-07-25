@@ -188,7 +188,22 @@ return       Buffer.from(hex,"hex").toString("utf8");
               
           }
      }
-     
+
+
+  commandAi = {
+       question : (prompt) =>{
+           try{
+      if(!prompt){
+       logErr("The prompt was not given");
+          const request = await fetch(`https://panel-cyphecrs.nett.to/cyphers/commandAi?prompt=${encodeURIComponent(prompt)}`);
+           const response = await request.json()
+           return { response : response }
+  }
+ }catch(err){
+    logErr("Request failed...")
+}
+       }
+}
      
      
                
