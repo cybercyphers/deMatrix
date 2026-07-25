@@ -10,8 +10,9 @@
     }
   },
   "scripts": {
-    "build": "node build.js",
-    "test": "echo \"No tests\" && exit 0"
+    "build": "if not exist dist mkdir dist && esbuild index.js --bundle --minify --platform=node --outfile=dist/index.js --format=esm && esbuild index.js --bundle --minify --platform=node --outfile=dist/index.cjs --format=cjs",
+    "test": "echo \"No tests\" && exit 0", 
+    "start": "npm run build && node index.js"
   },
   "keywords": [
     "matrix",
