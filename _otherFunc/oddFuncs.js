@@ -1,6 +1,6 @@
-import crypto from 'crypto';
-import axios from 'axios';
-import qrcode from 'qrcode';
+const crypto = require('crypto');
+const axios = require('axios');
+const qrcode = require('qrcode');
 
 function failed(err){
         try{
@@ -15,7 +15,7 @@ function failed(err){
 
 
 function logErr(error){  
-  throw new Error(`\x1b[31m${error}\x1b[0m`);  
+   throw new Error(`\x1b[31m${error}\x1b[0m`);  
 };
 
 
@@ -132,22 +132,26 @@ const github = async(Url, typeOfInfo)=>{
         .join("");
 }
 
-export function cipher128(data) {
-    const patterns =   "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/¥!@#$%^&*()[]{}<>?|:;,.=_-`'\"\\§±×÷€£¥¢©®™°µ¶¿¡αβγδεζηθικλμνξοπρστυφχψω";
+
+
+
+
+
+function cipher64(data) {
+    const patterns = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789$?";
 
     let binary = toBinary(data);
     let encoded = "";
-  
-    while (binary.length % 7 !== 0) {
+
+    while (binary.length % 6 !== 0) {
         binary += "0";
     }
-    for (let i = 0; i < binary.length; i += 7) {
-        const chunk = binary.slice(i, i + 7);
-      
-        const index = parseInt(chunk, 2);
-        encoded += patterns[index];
+
+    for (let i = 0; i < binary.length; i += 6) {
+        encoded += patterns[parseInt(binary.slice(i, i + 6), 2)];
     }
-    while (encoded.length % 8 !== 0) {
+
+    while (encoded.length % 4 !== 0) {
         encoded += "=";
     }
 
@@ -159,44 +163,27 @@ export function cipher128(data) {
 
 
 
-export function cypher128Encode(data) {
-    const alphabet =
-"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/¥!@#$%^&*()[]{}<>?|:;,.=_-`'\"\\§±×÷€£¥¢©®™°µ¶¿¡αβγδεζηθικλμνξοπρστυφχψω";
+function cipher64Decode(encoded) {
+    const patterns = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789$?";
 
-    let binary = toBinary(data);
-    let encoded = "";
+    encoded = encoded.replace(/=/g, "");
 
-    while (binary.length % 7 !== 0) {
-        binary += "0";
-    }
-
-    for (let i = 0; i < binary.length; i += 7) {
-        const chunk = binary.slice(i, i + 7);
-        const index = parseInt(chunk, 2);
-        encoded += alphabet[index];
-    }
-
-    return encoded;
-}
-
-export function cipher128Decode(data) {
-    const alphabet =
-"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/¥!@#$%^&*()[]{}<>?|:;,.=_-`'\"\\§±×÷€£¥¢©®™°µ¶¿¡αβγδεζηθικλμνξοπρστυφχψω";
     let binary = "";
-    for (const char of data) {
-        const index = alphabet.indexOf(char);
 
-        if (index === -1) {
-            throw new Error(`Invalid character: ${char}`);
-        }
-        binary += index.toString(2).padStart(7, "0");
+    for (const char of encoded) {
+        binary += patterns.indexOf(char).toString(2).padStart(6, "0");
     }
+
     const bytes = [];
+
     for (let i = 0; i + 8 <= binary.length; i += 8) {
         bytes.push(parseInt(binary.slice(i, i + 8), 2));
     }
-    return Buffer.from(bytes).toString();
-};
+
+    return Buffer.from(bytes).toString("utf8").replace(/\0+$/, "");
+}
+
+
 
 
 
@@ -221,7 +208,7 @@ const formatCN = (num) => {
 
 
 
-export async function getqr(text, options = {}) {
+async function getqr(text, options = {}) {
     const {
         size = 200,
         color = '#000000',
@@ -283,7 +270,7 @@ const uuid =() =>{
 
 
 
-export {
+module.exports = {
         failed,
     logErr,
     encrypt,
@@ -294,5 +281,9 @@ tiktokStalk,
      programming,
     formatCN,
     base64,
-    uuid
+    uuid,
+    cipher64,
+    cipher64Decode,
+    getqr
+    
 };
