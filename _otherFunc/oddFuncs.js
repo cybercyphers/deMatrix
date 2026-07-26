@@ -1,6 +1,6 @@
-const crypto = require('crypto');
-const axios = require('axios');
-const qrcode = require('qrcode');
+import crypto from "crypto";
+import axios from "axios";
+import qrcode from "qrcode";
 
 function failed(err){
         try{
@@ -265,12 +265,7 @@ const uuid =() =>{
 }
 
 
-
-
-
-
-
-module.exports = {
+export {
         failed,
     logErr,
     encrypt,
