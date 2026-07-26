@@ -1,6 +1,6 @@
-const axios = require('axios');
-const crypto  = require('crypto');
-const  {
+import axios from "axios":
+import crypto from "crypto";
+import {
  failed,
  logErr,
  encrypt,
@@ -15,7 +15,7 @@ const  {
     uuid,
     cipher64,
     cipher64Decode
-} = require("./_otherFunc/oddFuncs.js");
+}  from "./_otherFunc/oddFuncs.js";
 
 
 const route = "https://panel-cyphers.nett.to/cyphers"
@@ -207,10 +207,7 @@ return       Buffer.from(hex,"hex").toString("utf8");
      
      
                
-}
-
-const Ais = new Ai();
-Ais.qwen.question("hello nigga").then(d=>console.log(d))
+};
 
 
 
@@ -233,8 +230,8 @@ uncensoredAi,
 
 
 
-module.exports = {
-        default : dematrix,
+export  {
+    dematrix as default,
     formatCN,
     getqr,
     cipher64,
@@ -255,3 +252,6 @@ module.exports = {
 process.on("uncaughtException",(e)=>{
   console.log(`\x1b[31mUncaught Exception => ${e}\x1b[0m`);
 });*/
+
+
+//copyright 2026 cyber_cyphers
