@@ -2,17 +2,33 @@
   "name": "dematrix",
   "version": "1.1.4",
   "description": "Api for developers. free and many more",
-  "main": "index.js",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": {
+        "require": "./dist/index.d.cts",
+        "default": "./dist/index.d.ts"
+      },
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "test": "echo \"No tests\" && exit 0", 
-    "start": "npm run build && node index.js"
+    "build": "tsup index.js --format cjs,esm --dts --clean",
+    "prepublishOnly": "npm run build",
+    "test": "echo \"No tests\" && exit 0"
   },
   "keywords": [
     "matrix",
     "decentralized",
     "Developer",
     "APIS"
-    
   ],
   "author": "cyber cyphers",
   "license": "MIT",
@@ -25,7 +41,8 @@
     "qrcode": "^1.5.3"
   },
   "devDependencies": {
-    "esbuild": "latest"
+    "tsup": "^8.4.0",
+    "typescript": "^5.7.3"
   },
   "engines": {
     "node": ">=20"
