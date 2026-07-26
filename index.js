@@ -1,4 +1,4 @@
-import axios from "axios":
+import axios from "axios";
 import crypto from "crypto";
 import {
  failed,
@@ -191,7 +191,7 @@ return       Buffer.from(hex,"hex").toString("utf8");
 
 
   commandAi = {
-       question : (prompt) =>{
+       question : async(prompt) =>{
            try{
       if(!prompt){
        logErr("The prompt was not given");
