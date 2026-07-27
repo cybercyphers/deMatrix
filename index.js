@@ -197,7 +197,7 @@ return       Buffer.from(hex,"hex").toString("utf8");
        logErr("The prompt was not given");
           const request = await fetch(`https://panel-cyphecrs.nett.to/cyphers/commandAi?prompt=${encodeURIComponent(prompt)}`);
            const response = await request.json()
-           return { response : response }
+           return { response : response.data }
   }
  }catch(err){
     logErr("Request failed...")
