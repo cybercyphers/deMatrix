@@ -163,7 +163,7 @@ function cipher64(data) {
         encoded += "=";
     }
 
-    return encoded;
+    return { encoded };
 }
 
 
@@ -188,7 +188,7 @@ function cipher64Decode(encoded) {
         bytes.push(parseInt(binary.slice(i, i + 8), 2));
     }
 
-    return Buffer.from(bytes).toString("utf8").replace(/\0+$/, "");
+    return { decoded : Buffer.from(bytes).toString("utf8").replace(/\0+$/, "") };
 }
 
 
@@ -260,7 +260,7 @@ const base64 = (data)=>{
   };
 
     const _64 = crypto.createHash("SHA512").update(data).digest("base64");
-     return _64;
+     return { base64 : _64 };
     
 };
 
@@ -269,7 +269,7 @@ const base64 = (data)=>{
 
 const uuid =() =>{
     const uid = crypto.randomUUID();
-     return uid;
+     return { uid };
 }
 
 
