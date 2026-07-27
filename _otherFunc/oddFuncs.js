@@ -127,6 +127,10 @@ const github = async(Url, typeOfInfo)=>{
 
 
   function toBinary(data) {
+          if(!data){
+                  return logErr("A value is required");
+          };
+          
     return [...Buffer.from(data)]
         .map(byte => byte.toString(2).padStart(8, "0"))
         .join("");
@@ -138,6 +142,10 @@ const github = async(Url, typeOfInfo)=>{
 
 
 function cipher64(data) {
+        if(!data){
+                return logErr("A value is required to encrypt...");
+        };
+        
     const patterns = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789$?";
 
     let binary = toBinary(data);
